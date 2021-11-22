@@ -28,6 +28,8 @@ class PerceptronModel(object):
         Deberiais obtener el producto escalar (o producto punto) que es "equivalente" a la distancia del coseno
         """
         "*** YOUR CODE HERE ***"
+        return nn.DotProduct(x,self.get_weights)
+
 
     def get_prediction(self, x):
         """
@@ -37,6 +39,10 @@ class PerceptronModel(object):
         Returns: 1 or -1
         """
         "*** YOUR CODE HERE ***"
+        if nn.as_scalar(self.run(x)) >=0:
+            return 1
+        else:
+            return -1
 
     def train(self, dataset):
         """
@@ -44,6 +50,7 @@ class PerceptronModel(object):
         Hasta que TODOS los ejemplos del train esten bien clasificados. Es decir, hasta que la clase predicha en se corresponda con la real en TODOS los ejemplos del train
         """
         "*** YOUR CODE HERE ***"
+        
 
 class RegressionModel(object):
     """
@@ -70,7 +77,7 @@ class RegressionModel(object):
         Runs the model for a batch of examples.
 
         Inputs:
-            x: a node with shape (batch_size x 1). En este caso cada ejemplo solo está compuesto por un rasgo
+            x: a node with shape (batch_size x 1). En este caso cada ejemplo solo estï¿½ compuesto por un rasgo
         Returns:
             A node with shape (batch_size x 1) containing predicted y-values.
             Como es un modelo de regresion, cada valor y tambien tendra un unico valor
@@ -165,7 +172,7 @@ class DigitClassificationModel(object):
         Returns: a loss node
         """
         "*** YOUR CODE HERE ***"#NO ES NECESARIO QUE LO IMPLEMENTEIS, SE OS DA HECHO
-         return nn.SoftmaxLoss(self.run(x), y)# COMO VEIS LLAMA AL RUN PARA OBTENER POR CADA BATCH
+        return nn.SoftmaxLoss(self.run(x), y)# COMO VEIS LLAMA AL RUN PARA OBTENER POR CADA BATCH
                                               # LOS 10 VALORES DEL "COSENO". TENIENDO EL Y REAL POR CADA EJEMPLO
                                               # APLICA SOFTMAX PARA CALCULAR EL COSENO MAX
                                               # (COMO UNA PROBABILIDAD), Y ESA SERA SU PREDICCION,
