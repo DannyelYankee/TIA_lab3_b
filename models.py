@@ -28,7 +28,7 @@ class PerceptronModel(object):
         Deberiais obtener el producto escalar (o producto punto) que es "equivalente" a la distancia del coseno
         """
         "*** YOUR CODE HERE ***"
-        return nn.DotProduct(x,self.get_weights)
+        return nn.DotProduct(x,self.w)
 
 
     def get_prediction(self, x):
@@ -50,7 +50,13 @@ class PerceptronModel(object):
         Hasta que TODOS los ejemplos del train esten bien clasificados. Es decir, hasta que la clase predicha en se corresponda con la real en TODOS los ejemplos del train
         """
         "*** YOUR CODE HERE ***"
-        
+        converge = False
+        batch_size = 10 #tiene que ser un divisor de 200
+
+        for x,y in dataset.iterate_once(batch_size):
+            print(x)
+            print(y)
+
 
 class RegressionModel(object):
     """
