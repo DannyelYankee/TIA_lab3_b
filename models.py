@@ -39,7 +39,7 @@ class PerceptronModel(object):
         Returns: 1 or -1
         """
         "*** YOUR CODE HERE ***"
-        if nn.as_scalar(self.run(x)) >=0:
+        if nn.as_scalar(self.run(x)) >=0.0:
             return 1
         else:
             return -1
@@ -50,13 +50,16 @@ class PerceptronModel(object):
         Hasta que TODOS los ejemplos del train esten bien clasificados. Es decir, hasta que la clase predicha en se corresponda con la real en TODOS los ejemplos del train
         """
         "*** YOUR CODE HERE ***"
-        converge = False
-        batch_size = 10 #tiene que ser un divisor de 200
-
-        for x,y in dataset.iterate_once(batch_size):
-            print(x)
-            print(y)
-
+        batch = 1 # tiene que ser divisor de 200
+        converge = True
+        while converge:
+            ok = False
+            for x,y in dataset.iterate_once(batch):
+                if self.get_prediction(x) != nn.as_scalar(y):
+                    ok=True
+                    nn.Parameter.update(self.w,x,nn.as_scalar(y))
+            if not ok:
+                converge = False           
 
 class RegressionModel(object):
     """
