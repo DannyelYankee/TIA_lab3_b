@@ -86,6 +86,7 @@ class RegressionModel(object):
         self.b0=nn.Parameter(5,1)
         self.w1=nn.Parameter(1,2)
         self.b1=nn.Parameter(1,1)
+    
     def run(self, x):
         """
         Runs the model for a batch of examples.
@@ -97,6 +98,7 @@ class RegressionModel(object):
             Como es un modelo de regresion, cada valor y tambien tendra un unico valor
         """
         "*** YOUR CODE HERE ***"
+
 
     def get_loss(self, x, y):
         """
@@ -127,9 +129,15 @@ class RegressionModel(object):
             #UNA FUNCION DE LA LA CUAL SE  PUEDE CALCULAR LA DERIVADA (GRADIENTE)
 
             "*** YOUR CODE HERE ***"
-
+            for x, y in dataset.iterate_once(batch_size):
+                loss = self.get_loss(x, y)
+                gradiente=nn.gradients(loss, [self.w0, self.w1, self.b0, self.b1])
+                self.w0.update(gradiente[0], self.lr)
+                self.w1.update(gradiente[1], self.lr)
+                self.b0.update(gradiente[2], self.lr)
+                self.b1.update(gradiente[3], self.lr)
             total_loss = nn.as_scalar(self.get_loss(nn.Constant(dataset.x), nn.Constant(dataset.y)))#AQUI SE CALCULA OTRA VEZ EL ERROR PERO SOBRE TODO EL TRAIN A LA VEZ (CUIDADO!! NO ES LO MISMO el x de antes QUE dataset.x)
-            
+
 class DigitClassificationModel(object):
     """
     A model for handwritten digit classification using the MNIST dataset.
