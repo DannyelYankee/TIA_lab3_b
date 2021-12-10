@@ -113,7 +113,7 @@ class RegressionModel(object):
                 return nn.SquareLoss(self.run(x),ANNADE LA VARIABLE QUE ES NECESARIA AQUI), para medir el error, necesitas comparar el resultado de tu prediccion con .... que?
         """
         "*** YOUR CODE HERE ***"
-        nn.SquareLoss(self.run(x), y)
+        return nn.SquareLoss(self.run(x), y)
 
     def train(self, dataset):
         """
@@ -159,6 +159,11 @@ class DigitClassificationModel(object):
 
         output_size = 10 # TAMANO EQUIVALENTE AL NUMERO DE CLASES DADO QUE QUIERES OBTENER 10 "COSENOS"
         "*** YOUR CODE HERE ***"
+        self.lr = -0.05
+        self.w0=nn.Parameter(1,5)
+        self.b0=nn.Parameter(5,1)
+        self.w1=nn.Parameter(1,2)
+        self.b1=nn.Parameter(1,1)
 
     def run(self, x):
         """
@@ -214,6 +219,13 @@ class DigitClassificationModel(object):
             #ACTUALIZAR LOS PESOS EN BASE AL ERROR loss = self.get_loss(x, y) QUE RECORDAD QUE GENERA
             #UNA FUNCION DE LA LA CUAL SE  PUEDE CALCULAR LA DERIVADA (GRADIENTE)
             "*** YOUR CODE HERE ***"
+            for x, y in dataset.iterate_once(batch_size):
+                loss = self.get_loss(x, y)
+                gradiente=nn.gradients(loss, [self.w0, self.w1, self.b0, self.b1])
+                self.w0.update(gradiente[0], self.lr)
+                self.w1.update(gradiente[1], self.lr)
+                self.b0.update(gradiente[2], self.lr)
+                self.b1.update(gradiente[3], self.lr)
 
 class LanguageIDModel(object):
     """
