@@ -80,7 +80,12 @@ class RegressionModel(object):
         # self.lr = -0.01
         #
         "*** YOUR CODE HERE ***"
-
+        self.lr = -0.05
+        self.batch_size=20
+        self.w0=nn.Parameter(1,5)
+        self.b0=nn.Parameter(5,1)
+        self.w1=nn.Parameter(1,2)
+        self.b1=nn.Parameter(1,1)
     def run(self, x):
         """
         Runs the model for a batch of examples.
@@ -106,7 +111,7 @@ class RegressionModel(object):
                 return nn.SquareLoss(self.run(x),ANNADE LA VARIABLE QUE ES NECESARIA AQUI), para medir el error, necesitas comparar el resultado de tu prediccion con .... que?
         """
         "*** YOUR CODE HERE ***"
-
+        nn.SquareLoss(self.run(x), y)
 
     def train(self, dataset):
         """
