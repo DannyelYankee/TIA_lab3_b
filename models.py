@@ -85,7 +85,7 @@ class RegressionModel(object):
         self.b0 = nn.Parameter(1, 5)
         self.w1 = nn.Parameter(5, 1)
         self.b1 = nn.Parameter(1, 1)
-        self.lr = -0.01
+        self.lr = -0.0041
     def run(self, x):
         """
         Runs the model for a batch of examples.
@@ -163,8 +163,8 @@ class DigitClassificationModel(object):
 
         output_size = 10 # TAMANO EQUIVALENTE AL NUMERO DE CLASES DADO QUE QUIERES OBTENER 10 "COSENOS"
         "*** YOUR CODE HERE ***"
-        self.batch_size = 1
-        self.lr = -0.05
+        self.batch_size = 10    #10 30 epochs
+        self.lr = -0.036        #-0.037
         self.w0=nn.Parameter(784,100)
         self.b0=nn.Parameter(1,100)
         self.w1=nn.Parameter(100,10)
