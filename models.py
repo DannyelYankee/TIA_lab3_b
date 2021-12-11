@@ -165,10 +165,10 @@ class DigitClassificationModel(object):
         "*** YOUR CODE HERE ***"
         self.batch_size = 1
         self.lr = -0.05
-        self.w0=nn.Parameter(1,5)
-        self.b0=nn.Parameter(5,1)
-        self.w1=nn.Parameter(1,2)
-        self.b1=nn.Parameter(1,1)
+        self.w0=nn.Parameter(784,100)
+        self.b0=nn.Parameter(1,100)
+        self.w1=nn.Parameter(100,10)
+        self.b1=nn.Parameter(1,10)
 
     def run(self, x):
         """
