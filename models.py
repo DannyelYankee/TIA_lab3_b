@@ -80,13 +80,12 @@ class RegressionModel(object):
         # self.lr = -0.01
         #
         "*** YOUR CODE HERE ***"
-        self.lr = -0.05
-        self.batch_size=20
-        self.w0=nn.Parameter(1,5)
-        self.b0=nn.Parameter(5,1)
-        self.w1=nn.Parameter(1,2)
-        self.b1=nn.Parameter(1,1)
-    
+        self.batch_size = 1
+        self.w0 = nn.Parameter(1, 5)
+        self.b0 = nn.Parameter(1, 5)
+        self.w1 = nn.Parameter(5, 1)
+        self.b1 = nn.Parameter(1, 1)
+        self.lr = -0.01
     def run(self, x):
         """
         Runs the model for a batch of examples.
@@ -98,6 +97,11 @@ class RegressionModel(object):
             Como es un modelo de regresion, cada valor y tambien tendra un unico valor
         """
         "*** YOUR CODE HERE ***"
+        xw0 = nn.Linear(x, self.w0)
+        r = nn.ReLU(nn.AddBias(xw0, self.b0))
+        rw1 = nn.Linear(r, self.w1)
+        return nn.AddBias(rw1, self.b1)
+
 
 
     def get_loss(self, x, y):
@@ -159,6 +163,7 @@ class DigitClassificationModel(object):
 
         output_size = 10 # TAMANO EQUIVALENTE AL NUMERO DE CLASES DADO QUE QUIERES OBTENER 10 "COSENOS"
         "*** YOUR CODE HERE ***"
+        self.batch_size = 1
         self.lr = -0.05
         self.w0=nn.Parameter(1,5)
         self.b0=nn.Parameter(5,1)
@@ -181,6 +186,10 @@ class DigitClassificationModel(object):
             output_size = 10 # TAMANO EQUIVALENTE AL NUMERO DE CLASES DADO QUE QUIERES OBTENER 10 "COSENOS"
         """
         "*** YOUR CODE HERE ***"
+        xw0 = nn.Linear(x, self.w0)
+        r = nn.ReLU(nn.AddBias(xw0, self.b0))
+        rw1 = nn.Linear(r, self.w1)
+        return nn.AddBias(rw1, self.b1)
 
     def get_loss(self, x, y):
         """
