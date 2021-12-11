@@ -92,7 +92,7 @@ class RegressionModel(object):
         Runs the model for a batch of examples.
 
         Inputs:
-            x: a node with shape (batch_size x 1). En este caso cada ejemplo solo est� compuesto por un rasgo
+            x: a node with shape (batch_size x 1). En este caso cada ejemplo solo esta compuesto por un rasgo
         Returns:
             A node with shape (batch_size x 1) containing predicted y-values.
             Como es un modelo de regresion, cada valor y tambien tendra un unico valor
